@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import {FormBuilder,FormGroup,Validators,FormControl} from '@angular/forms'
 import { Router } from '@angular/router';
 import { ForgotPassowrdService } from 'src/app/forgot-passowrd.service';
+import { forgotPassModel } from 'src/app/models/reset-password.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
@@ -30,9 +31,9 @@ ngOnInit(): void {
     password:['',Validators.required]
   });
   this.myfg = this.fb.group({
-    Email : new FormControl(['',Validators.required]),
-    NewPassword :new FormControl(['',Validators.required]),
-    ConfirmPassword : new FormControl(['',Validators.required])
+    Email : ['',Validators.required],
+    NewPassword : ['',Validators.required],
+    ConfirmPassword : ['',Validators.required]
   })
 
 }
@@ -100,9 +101,11 @@ ForgotPass(){
     //   }
     // })
 
-  this.forgotpasswordservice.forgot(this.myfg.value).subscribe(result=>{
-    alert(result.Message);
-  })
+  console.log(this.myfg.value);
+  this.forgotpasswordservice.forgot(this.myfg.value).subscribe((result:forgotPassModel)=>{
+    alert(result['message']);
+    console.log(result['message']);
+  });
 
 }
 }

@@ -4,3 +4,8 @@ export class ResetPassword{
     public newPassword!:string;
     public confirmPassword!:string;
 }
+
+export class forgotPassModel{
+  statusCode!:number;
+  message!:string;
+}
